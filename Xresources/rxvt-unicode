@@ -1,0 +1,35 @@
+!===============================URXVT=================================|
+! [ Font ]
+URxvt.font: xft:Droid Sans Mono for Powerline:size=11
+
+! [ Cursor ]
+URxvt.cursorUnderline: true
+URxvt.cursorBlink: true
+
+!URxvt.pointerColor: #F6F17F
+!URxvt.pointerColor2: #F6F17F
+
+URxvt.internalBorder: 22
+
+! [ Scroll ]
+! [[ Disable default scrollbar ]]
+URxvt.scrollBar: false
+
+! [[ do not scroll with output ]]
+URxvt*scrollTtyOutput: false
+
+! [[ scroll in relation to buffer (with mouse scroll or Shift+Page Up) ]]
+URxvt*scrollWithBuffer: true
+
+!=> [[ scroll back to the bottom on keypress ]]
+URxvt*scrollTtyKeypress: true
+
+! [[ Enable scroll in scrolling within secondery screens, i.e. less ]]
+URxvt.secondaryScreen: 1
+URxvt.secondaryScroll: 0
+
+URxvt.pointerBlank: true
+
+! [[ Do not save lines, use tmux instead (Very long lines cause slowdown) ]]
+!URxvt*saveLines: 0
+!=====================================================================|

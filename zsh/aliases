@@ -1,0 +1,218 @@
+###########
+# ALIASES #
+###########
+# [Shell colors]
+reset=`tput sgr0`
+red=`tput setaf 1`
+green=`tput setaf 2`
+purple=`tput setaf 5`
+yellow=`tput setaf 4`
+######################
+
+alias x=exit
+alias pls='sudo'
+
+alias colorscheme='echo $BASE16_THEME'
+
+#==========#
+#=> List <=#
+#==========#
+# Detect which `ls` flavor is in use
+if ls --color > /dev/null 2>&1; then # GNU `ls`
+	colorflag='--color'
+else # OS X `ls`
+	colorflag='-G'
+fi
+
+# List all files colorized in long format
+alias l='ls -l ${colorflag}'
+
+# List all files colorized in long format, including dot files
+alias la='ls -la ${colorflag}'
+
+# List only directories
+alias lsd='ls -lF ${colorflag} | grep --color=never '^d''
+
+#===================#
+#=> DIR's & Files <=#
+#===================#
+alias ..='cd ../ && ls'
+alias ...='cd ../../  && ls'
+alias ....='cd ../../../  && ls'
+
+alias discord="pls echo 'Running Discord' && pls flatpak run com.discordapp.Discord &"
+
+alias dls='cd ~/Downloads  && ls'
+
+alias tre='tree -L 2'
+alias rmrf='pls rm -rf'
+
+alias work='cd ~/Lab/Work/ && tre -a'
+alias lab='cd ~/Lab/ && echo ${purple}"---------------------------------\nChoose your adventure for the day :D \n---------------------------------"${reset} && l'
+alias pylab='cd ~/Lab/Python && l'
+alias weblab='cd ~/Lab/Web && l'
+alias phplab='cd ~/Lab/Web/.lamp/ && l'
+
+# alias projects
+# alias ongoing
+
+#==================#
+#=> Pacman & AUR <=#
+#==================#
+#--> Pacman
+alias pacin='pls pacman -S'   # install
+alias pacu='pls pacman -Syu'    # update, add 'a' to the list of letters to update AUR packages if you use yaourt
+alias pacrm='pls pacman -Rs'   # remove
+alias pacs='pls pacman -Ss'    # search
+alias paci='pls pacman -Si'    # info
+alias paclo='pls pacman -Qdt'  # list orphans
+alias pacro='paclo && pls pacman -Rns $(pacman -Qtdq)' # remove orphans
+alias pacc='pls pacman -Scc'   # clean cache
+alias paclf='pls pacman -Ql'   # list files
+
+#--> AUR
+alias yain='yaourt -S --noconfirm'
+alias packin='packer -S'
+
+#=============================#
+#=> Applications & Services <=#
+#=============================#
+#--> ATOM
+alias at='atom'
+alias ath='atom .'
+alias sat='pls atom'
+
+#--> Sublime
+alias st='subl'
+alias sst='pls subl'
+alias sth='subl .'
+
+#--> VSCode
+alias c='code'
+alias ch='code .' # Just one char!, really ?
+
+#--> Vim
+alias v='vim'
+alias vh='vim .'
+alias sv='pld vim'
+
+# Lol, yeah i know i have a tooling problem
+
+#--> Php Artisan
+alias art='php artisan'
+alias artser='art serve'
+alias artmg='art migrate'
+alias artmk='art make'
+
+#--> Composer
+alias comp='composer'
+alias compi='comp install'
+alias compig='comp global require'
+alias compdump='comp dump-autoload'
+
+
+#--> Services
+alias enableservice='pls systemctl enable'
+alias startservice='pls systemctl start'
+alias servicestatus='pls systemctl status'
+alias disableservice='pls systemctl disable'
+
+alias apache-start='pls systemctl start httpd'
+alias apache-stop='pls systemctl stop httpd'
+alias apache-restart='pls systemctl restart httpd'
+alias apache-status='pls systemctl status httpd'
+
+#--> Youtube-dl
+alias ytd='youtube-dl'
+alias ytdo='ytd -o'
+alias ytdst='ytd -o "%(title)s-%(id)s.%(ext)s"'         # [Usage]: ytdst [URL]
+alias ytdla="ytd -a"          							# [Usage]: ytdla [URLS text file]
+alias ytdF='ytd -F'        	  							# [Usage]: ytdF [URL]
+alias ytdf='ytd -f '          							# [Usage]: ytdf [format ID] [URL]
+alias ytdaudio='ytdf 140'	  							# [Usage]: ytdaudio [URL]
+
+#======================#
+# > Package-Managers < #
+#======================#
+#--> Ruby-Gems
+alias gemi='gem install'
+alias geminodoc='gem install --no-doc --no-ri'
+
+#--> Python3 PIP
+alias pipi='pls pip3 install'
+alias pipu='pls pip3 install --upgrade'
+
+#--> NPM
+alias ni='pls npm install'
+alias nig='pls npm install -g'
+alias nip='pls npm install --production'
+alias nis='pls npm install --save'
+alias nid='pls npm install --save-dev'
+
+alias nlsoutd8='pls npm outdated -g --depth=0'
+alias nupd8='pls npm update -g'
+
+alias ns='pls npm start'
+alias nrd='npm run dev'
+alias nrw='npm run watch'
+alias nrp='npm run prod'
+alias nbp='pls npm build:prod'
+
+alias nom='rm -rf node_modules && npm cache clear && npm i'
+
+# npm offline
+# install npm dependencies from cache
+# https://github.com/npm/npm/issues/2568#issuecomment-30626394
+alias ncache='pls npm -cache-min=999999' # Do this one time please xD
+
+# offline-npm (it's an npm package')
+alias noffline='pls npm set registry http://127.0.0.1:5080'
+alias nonline="pls npm set registry https://registry.npmjs.org"
+
+#--> Yarn
+alias yarna='pls yarn add'
+alias yarnag='pls yarn global add'
+alias yarnad='pls yarn add --dev'
+alias yarnlist='pls yarn list'
+
+# Offline #
+# This will create a yarn-offline-cahce folder on the and caches the packages you are working with
+alias yarnoffline='pls yarn config set yarn-offline-mirror ./yarn-offline-cahce && mv ~/.yarnrc ./'
+
+#================================================================#
+# > CLT - Command Line Tools / Some tools that i use regularly < #
+#================================================================#
+alias live='live-server'
+
+#--> Git
+alias gi="git init"
+alias gs="git status"
+alias gd="git diff"
+alias gdh="git diff HEAD"
+alias gc="git clone $1 $2"
+alias gcm="git commit -m "$1""
+alias gaa="git add -A ."
+alias gpo="git push origin $1"
+alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias glo="git log --oneline"
+alias grhh="git reset --hard HEAD"
+alias gcp="git cherry-pick $1"
+
+#===========#
+# > Other < #
+#===========#
+alias say="espeak -a 60"
+alias reader="espeak -g -10 -a 80 -s 90 -p 90"
+
+#--> Configs
+alias dotfiles='code ~/.bin/dotfiles'
+alias dotfilesdi='cd ~/.bin/dotfiles'
+alias vimrc='vim ~/.vimrc'
+alias todo='vim ~/Lab/.Ideas/.todo/today.txt'
+alias roadmap='vim ~/Lab/.Ideas/roadmao.txt'
+alias shut="shutdown now"
+alias mem="free -m"
+
+#--> Disabling devices
+alias mouseoff="xinput set-int-prop 9 \"Device Enabled\" 8 0"
+alias mouseon="xinput set-int-prop 9 \"Device Enabled\" 8 1"

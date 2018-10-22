@@ -1,0 +1,13 @@
+
+!===============================XTerm=================================|
+! [ Font ]
+XTerm.vt100.locale: true
+XTerm.vt100.faceName: Droid Sans Mono for Powerline:size=10:antialias=false
+XTerm.vt100.font: 7x13
+
+! [ 256 Color mode ]
+XTerm.termName: xterm-256color
+
+! [ Alt fix ]
+XTerm.vt100.metaSendsEscape: true
+!=====================================================================|
