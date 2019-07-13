@@ -8,6 +8,8 @@
 !!
 !*/
 
+
+#include ".bin/dotfiles/Xresources/env"
 #include ".bin/dotfiles/Xresources/cursor"
 #include ".bin/dotfiles/Xresources/xterm"
 #include ".bin/dotfiles/Xresources/rxvt-unicode"

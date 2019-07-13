@@ -1,6 +1,6 @@
 !===============================URXVT=================================|
 ! [ Font ]
-URxvt.font: xft:Droid Sans Mono for Powerline:size=11
+URxvt.font: xft:Droid Sans Mono for Powerline:size=13
 
 ! [ Cursor ]
 URxvt.cursorUnderline: true
