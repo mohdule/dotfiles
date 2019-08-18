@@ -13,5 +13,4 @@
 #include ".bin/dotfiles/Xresources/cursor"
 #include ".bin/dotfiles/Xresources/xterm"
 #include ".bin/dotfiles/Xresources/rxvt-unicode"
-#include ".bin/dotfiles/Xresources/rofi"
 #include ".bin/dotfiles/Xresources/colorscheme"
