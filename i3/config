@@ -14,7 +14,7 @@ set $inactiveTextColor  #788286
 set $urgent             #E53935
 
 #=> Workspaces
-# For web browser
+# For web browsers
 set $ws1 "1"
 # For code editors
 set $ws2 "2"
@@ -22,7 +22,7 @@ set $ws2 "2"
 set $ws3 "3"
 # For file managers and media players
 set $ws4 "4"
-# For music
+# For music players
 set $ws10 "10"
 
 #----------#-----------------------------------------------------------------------------------#
@@ -36,28 +36,22 @@ bindsym $mod+Return exec --no-startup-id urxvt
 bindsym $mod+Shift+q kill
 
 # Start menu (Launcher) (Rofi)
-bindsym $mod+d exec rofi -show run -lines 5 -eh 2 -width 60 -padding 100 -fake-transparency -opacity "10%" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#957cd" -font "Open Sans 20"
+bindsym $mod+d exec rofi -show drun -show-icons -modi
 
 bindsym $mod+shift+x exec $HOME/.bin/dotfiles/i3/blur-lock.sh
 bindsym Print exec scrot ~/Pictures/Screenshots/%Y-%m-%d_%s_\$wx\$h.png
 
+#-------|
 # Media |
 #-------|
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
-
-# => Fallback
-# bindsym XF86MonBrightnessUp exec light -A 10 # increase screen brightness
-# bindsym XF86MonBrightnessDown exec light -U 10 # decrease screen brightness
-
-# Turnoff screen
-bindsym $mod+shift+f exec xset dpms force off
+bindsym XF86MonBrightnessUp exec light -A 10 # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 10 # decrease screen brightness
 
 # Touchpad controls
 bindsym XF86TouchpadToggle exec $HOME/.bin/dotfiles/scripts/toggletouchpad.sh # toggle touchpad
@@ -199,11 +193,10 @@ mode "resize" {
 
 #=> Workspace-Application assignment
 assign [class="Chromium"] $ws1
+assign [class="Insomnia"] $ws1
 assign [class="Firefox"] $ws1
 
-assign [class="Code"] $ws2
-assign [class="Atom"] $ws2
-assign [class="Subl3"] $ws2
+assign [class="code"] $ws2
 
 assign [class="URxvt"] $ws3
 
@@ -260,39 +253,18 @@ hide_edge_borders both
 #exec_always --no-startup-id
 exec_always --no-startup-id $HOME/.bin/dotfiles/polybar/launch.sh
 
-#=> Default i3-bar
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-#bar {
-#	status_command i3blocks -c ~/.config/i3/i3blocks.conf
-#	#position top
-#	# I need to customize this bar
-#	font pango: Open Sans 9, Font Awesome 9
-#	#strip_workspace_numbers yes
-#    height 20
-#    bindsym button1 nop
-#
-#	colors {
-#		background $bg-color
-#		separator #757575
-		#			border			background		text
-#		focused_workspace	$bg-color		$bg-color		$text-color
-#		inactive_workspace	$inactive-bg-color	$inactive-bg-color	$inactive-text-color
-#		urgent_workspace	$urgent-bg-color	$urgent-bg-color	$text-color
-#	}
-#}
-
 #----------#-----------------------------------------------------------------------------------#
 # Start-Up #
 #----------#
 # _always : startup an application every time you reload/open i3
 
-exec setxkbmap -layout us,ar
-exec setxkbmap -option 'grp:alt_space_toggle'
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec_always setxkbmap -layout us,ar
+exec setxkbmap -option 'grp:win_space_toggle'
 
 #exec --no-startup-id compton --config .config/compton/compton.conf
 exec --no-startup-id compton -f
-exec --no-startup-id $HOME/.bin/dotfiles/scripts/laptop_1080p.sh
+# exec --no-startup-id $HOME/.bin/dotfiles/scripts/laptop_1080p.sh
 exec --no-startup-id nitrogen --restore
 
 exec --no-startup-id guake
