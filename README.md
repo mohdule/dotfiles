@@ -1,2 +1,2 @@
 # My Arch Linux Config
-This i a backup of my linux machine configurations
+This is a backup of my linux machine configuration
