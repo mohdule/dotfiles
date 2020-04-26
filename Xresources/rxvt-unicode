@@ -9,7 +9,7 @@ URxvt.cursorBlink: true
 !URxvt.pointerColor: #F6F17F
 !URxvt.pointerColor2: #F6F17F
 
-URxvt.internalBorder: 22
+!URxvt.internalBorder: 22
 
 ! [ Scroll ]
 ! [[ Disable default scrollbar ]]
