@@ -47,6 +47,21 @@ SETUVAR _fish_abbr_ch:code\x20\x2e
 SETUVAR _fish_abbr_v:vim
 SETUVAR _fish_abbr_vh:vim .
 
+# Git
+SETUVAR _fish_abbr_g:git
+SETUVAR _fish_abbr_gs:git status
+SETUVAR _fish_abbr_gd:git diff
+SETUVAR _fish_abbr_ga:git add
+SETUVAR _fish_abbr_gl:git log
+SETUVAR _fish_abbr_gcm:git commit -m
+SETUVAR _fish_abbr_gp:git push
+SETUVAR _fish_abbr_gr:git reset
+SETUVAR _fish_abbr_gpl:git pull
+SETUVAR _fish_abbr_grh:git reset --hard
+SETUVAR _fish_abbr_gst:git stash
+SETUVAR _fish_abbr_gsta:git stash apply
+SETUVAR _fish_abbr_gstls:git stash list
+
 # Npm
 SETUVAR _fish_abbr_n:npm
 SETUVAR _fish_abbr_ni:npm\x20i
