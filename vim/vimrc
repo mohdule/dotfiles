@@ -20,7 +20,6 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 call plug#begin('~/.vim/plugged')
 
 Plug 'ycm-core/YouCompleteMe'
-Plug 'morhetz/gruvbox'
 Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive'
 Plug 'leafgarland/typescript-vim'
@@ -28,10 +27,14 @@ Plug 'vim-utils/vim-man'
 Plug 'lyuts/vim-rtags'
 Plug 'git@github.com:kien/ctrlp.vim.git'
 Plug 'mbbill/undotree'
+" Color Schemes
+Plug 'ntk148v/vim-horizon'
+Plug 'phanviet/vim-monokai-pro'
+Plug 'morhetz/gruvbox'
 
 call plug#end()
 
-colorscheme gruvbox
+colorscheme horizon 
 set background=dark
 
 if executable('rg')
