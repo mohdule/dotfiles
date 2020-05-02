@@ -77,6 +77,7 @@ SETUVAR _fish_abbr_pacs:sudo\x20pacman\x20\x2dS
 SETUVAR _fish_abbr_pacrs:sudo\x20pacman\x20\x2dRs
 SETUVAR _fish_abbr_pacu:sudo\x20pacman\x20\x2dSyu
 SETUVAR _fish_abbr_yays:yay\x20\x2dS
+SETUVAR _fish_abbr_yayu:yay -Sua
 
 # Youtube-dl
 SETUVAR _fish_abbr_ytd:youtube\x2ddl
