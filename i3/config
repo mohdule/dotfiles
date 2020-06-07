@@ -5,14 +5,6 @@
 #------#
 set $mod Mod4
 
-#=> Colors
-set $primary            #263238
-set $secondary          #384A53
-set $textColor          #39515E
-set $accent             #F6F17F
-set $inactiveTextColor  #788286
-set $urgent             #E53935
-
 #=> Workspaces
 # For web browsers
 set $ws1 "1"
@@ -39,6 +31,9 @@ set $ws10 "10"
 # KeyBinds #
 #----------#
 
+# Start browser
+bindsym $mod+b exec brave
+
 # start a terminal
 bindsym $mod+Return exec --no-startup-id urxvt
 
@@ -57,6 +52,7 @@ bindsym Print exec scrot ~/Pictures/Screenshots/%Y-%m-%d_%s_\$wx\$h.png
 #-------|
 # Media |
 #-------|
+
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5% #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5% #decrease sound volume
@@ -70,10 +66,11 @@ bindsym XF86MonBrightnessDown exec light -U 10 # decrease screen brightness
 bindsym XF86TouchpadToggle exec $HOME/.bin/dotfiles/scripts/toggletouchpad.sh # toggle touchpad
 
 # Media player controls
-bindsym XF86AudioStop exec playerctl stop
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioStop exec playerctl stop || mpc stop
+bindsym XF86AudioPlay exec playerctl play-pause || mpc toggle
+bindsym XF86AudioNext exec playerctl next || mpc next
+bindsym XF86AudioPrev exec playerctl previous || mpc prev
+bindsym $mod+XF86AudioPlay exec mpc toggle
 
 # Defalut i3 binds |
 #------------------|
@@ -102,10 +99,10 @@ bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+j focus down
+bindsym $mod+k focus up 
+bindsym $mod+h focus left
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -126,10 +123,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+x+h split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod++v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -209,6 +206,7 @@ workspace_auto_back_and_forth yes
 ####################################
 assign [class="Chromium"] $ws1
 assign [class="firefox"] $ws1
+assign [class="Brave"] $ws1
 
 assign [class="code"] $ws2
 
@@ -228,10 +226,12 @@ assign [class="Telegram"] $ws6
 
 assign [class="GravitDesigner"] $ws7
 assign [class="Gimp"] $ws7
+assign [class="Godot"] $ws7
 assign [class="MyPaint"] $ws7
 assign [class="Inkscape"] $ws7
 assign [class="tiled"] $ws7
 assign [class="Blender"] $ws7
+assign [class="Aseprite"] $ws7
 
 assign [class="dwarffortress"] $ws8
 assign [class="Steam"] $ws8
@@ -275,11 +275,16 @@ workspace $ws2 gaps inner 8
 #}
 
 # Window colors
-# 				[Background]		[border]		[Text]		[Indicator]
-client.focused                  $secondary	        $accent 		$textColor	$accent
-client.unfocused                $secondary              $primary	        $secondary	$accent
-client.focused_inactive         $secondary              $secondary		$accent
-client.urgent			$urgent		        $urgent	                #ffffff		$accent
+set_from_resource $fg i3wm.color7 #f0f0f0
+set_from_resource $bg i3wm.color0 #f0f0f0
+set $urgent             #E53935
+set_from_resource $accent i3wm.color14
+
+# 				                [Border]	[Background]	[Text]		[Indicator]
+client.focused                  $fg	        $fg 		    $bg	        $accent
+client.unfocused                $bg         $bg	            $fg	        $accent
+client.focused_inactive         $bg         $bg		        $accent
+client.urgent			        $urgent		$urgent	        $bg	$accent
 
 hide_edge_borders both
 
@@ -294,18 +299,36 @@ exec_always --no-startup-id $HOME/.bin/dotfiles/polybar/launch.sh
 #----------#-----------------------------------------------------------------------------------#
 # Start-Up #
 #----------#
+# Info #
+# =====#
+# i3 now supports startup notifications, meaning that during an application
+# starts up, the mouse cursor will change to 'watch' on the root window. Also,
+# the application window will appear on the workspace on which it was launched
+# (not on the currently focused workspace). Some applications don’t support
+# startup notifications. If the cursor change bothers you, turn it off by using
+# the --no-startup-id flag (see the userguide).
+#
+#
+# The --no-startup-id parameter disables startup-notification support for this 
+# particular exec command. With startup-notification, i3 can make sure that a window
+# appears on the workspace on which you used the exec command. Also, it will change
+# the X11 cursor to watch (a clock) while the application is launching. So, if an
+# application is not startup-notification aware (most GTK and Qt using applications
+# seem to be, though), you will end up with a watch cursor for 60 seconds.
+#
 # _always : startup an application every time you reload/open i3
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec pulseeffects --gapplication-service
 exec_always setxkbmap -layout us,ar
 exec_always setxkbmap -option 'grp:alt_space_toggle'
 
 #exec --no-startup-id compton --config .config/compton/compton.conf
 # exec --no-startup-id $HOME/.bin/dotfiles/scripts/laptop_1080p.sh
-exec --no-startup-id compton -f
+exec --no-startup-id picom -f --respect-prop-shadow
 exec --no-startup-id wal -R
 
-exec --no-startup-id guake
+exec guake
 exec --no-startup-id nm-applet
 
 
