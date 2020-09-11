@@ -32,7 +32,7 @@ set $ws10 "10"
 #----------#
 
 # Start browser
-bindsym $mod+b exec brave
+bindsym $mod+b exec chromium
 
 # start a terminal
 bindsym $mod+Return exec --no-startup-id urxvt
@@ -66,12 +66,19 @@ bindsym XF86MonBrightnessDown exec light -U 10 # decrease screen brightness
 bindsym XF86TouchpadToggle exec $HOME/.bin/dotfiles/scripts/toggletouchpad.sh # toggle touchpad
 
 # Media player controls
+# => playerctl
 bindsym XF86AudioStop exec playerctl stop || mpc stop
 bindsym XF86AudioPlay exec playerctl play-pause || mpc toggle
 bindsym XF86AudioNext exec playerctl next || mpc next
 bindsym XF86AudioPrev exec playerctl previous || mpc prev
-bindsym $mod+XF86AudioPlay exec mpc toggle
 
+# => mpc (mpd)
+bindsym $mod+XF86AudioPlay exec mpc toggle
+bindsym $mod+XF86AudioStop exec mpc stop
+bindsym $mod+XF86AudioPrev exec mpc prev
+bindsym $mod+XF86AudioNext exec mpc next
+
+#------------------|
 # Defalut i3 binds |
 #------------------|
 # Switch workspaces
@@ -209,6 +216,8 @@ assign [class="firefox"] $ws1
 assign [class="Brave"] $ws1
 
 assign [class="code"] $ws2
+assign [class="Code"] $ws2
+
 
 assign [class="URxvt"] $ws3
 assign [class="Insomnia"] $ws3
@@ -257,8 +266,8 @@ gaps inner 10
 gaps outer 9
 
 # Custom ws gaps
-workspace $ws2 gaps outer 0
-workspace $ws2 gaps inner 8
+#workspace $ws2 gaps outer 0
+#workspace $ws2 gaps inner 8
 
 # smart_gaps on
 # smart_borders on
